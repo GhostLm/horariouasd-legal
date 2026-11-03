@@ -13,3 +13,32 @@ footer a{color:var(--accent);text-decoration:none;font-weight:650}
 footer a:hover{text-decoration:underline}
 @media(max-width:910px){.store-availability{justify-content:center}}
 @media(max-width:470px){.brand--logo{font-size:16px}.brand--logo .mark{width:38px;height:38px}.brand--logo .site-logo{width:30px;height:30px}.legal-links{gap:10px}}
+
+/* Transiciones de capturas en la portada: la imagen saliente mantiene el contenido visible mientras entra la nueva. */
+.screen{isolation:isolate}
+.screen img.preview-frame-leave{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  z-index:2;
+  pointer-events:none;
+  animation:preview-out 260ms cubic-bezier(.22,1,.36,1) both;
+}
+.screen img.preview-frame-enter{
+  animation:preview-in 260ms cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes preview-out{
+  from{opacity:1;transform:translateX(0) scale(1)}
+  to{opacity:0;transform:translateX(-8px) scale(.992)}
+}
+@keyframes preview-in{
+  from{opacity:.75;transform:translateX(8px) scale(1.008)}
+  to{opacity:1;transform:translateX(0) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .screen img.preview-frame-enter,
+ .screen img.preview-frame-leave{animation:none!important}
+}
