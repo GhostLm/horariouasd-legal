@@ -66,8 +66,7 @@
       const body=selected.length?selected.map(it=>card(it,days[it.day].color)).join(""):'<div class="phone-card phone-empty">No hay clases para este día en la demostración.</div>';
       viewport.innerHTML=heading+dayCards()+'<div class="phone-content"><button type="button" data-open-agenda="'+index+'" class="schedule-summary" style="width:100%;text-align:left;cursor:pointer"><span><strong>'+((state.day===3)?"Hoy":days[index].name)+'</strong> · '+selected.length+' clase'+(selected.length===1?'':'s')+' · 0 recordatorios</span><span aria-hidden="true">›</span></button>'+body+'</div>';
     }else{
-      const rows=days.map((day,i)=>{
-        const num=i+1, data=state.week===0?classData.filter(c=>c.day===i):[];
+      const rows=[1,2,3,4,5,6,0].map((idx,i)=>{\n        const day=days[idx];\n        const num=i+1, data=state.week===0?classData.filter(c=>c.day===idx):[];
         const subjects=data.slice(0,3).map(c=>'<div class="weekday-subject"><strong>'+c.name+'</strong><small>'+c.time+'</small></div>').join("");
         return '<div class="weekday-row'+(!data.length?' has-no-classes':'')+'" style="--card-day:'+day.color+'"><div class="weekday-cell">'+day.short+'<strong>'+num+'</strong></div><div class="weekday-subjects">'+subjects+'</div><button type="button" class="weekday-more" data-open-agenda="'+idx+'" aria-label="Ver agenda del '+day.name+'">›</button></div>';
       }).join("");
