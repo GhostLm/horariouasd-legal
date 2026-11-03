@@ -25,14 +25,33 @@
 [data-theme="light"] .site-logo{filter:brightness(0) saturate(100%) invert(15%) sepia(22%) saturate(1894%) hue-rotate(196deg) brightness(92%) contrast(96%)}
 [data-theme="dark"] .site-logo{filter:brightness(0) invert(1)}
 .nav-actions{display:flex;align-items:center;gap:13px}
-.sitehead .theme{border:1px solid var(--border)}
-.sitehead .theme button.active{background:var(--selection);color:var(--accent);box-shadow:none}
-.sitehead .theme button:hover:not(.active){background:var(--selection);color:var(--accent)}
+.preview-panel .theme{border:1px solid var(--border)}
+.preview-panel .theme button.active{background:var(--selection);color:var(--accent);box-shadow:none}
+.preview-panel .theme button:hover:not(.active){background:var(--selection);color:var(--accent)}
 .screen img{object-fit:contain}
 .legal-links a{color:var(--muted)}
 .legal-links a:hover{color:var(--accent);text-decoration:none}
 footer a{color:var(--accent);text-decoration:none;font-weight:600}
 footer a:hover{text-decoration:underline}
 .sitehead a:focus-visible,.sitehead button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-@media(max-width:600px){.sitehead .nav{min-height:64px}.brand{font-size:14px;gap:7px}.mark{width:37px;height:37px;border-radius:11px}.site-logo{width:28px;height:28px}.nav-actions{gap:5px}.nav-actions .legal-links{display:none}.sitehead .theme button{padding:7px 9px}}
+@media(max-width:600px){.sitehead .nav{min-height:64px}.brand{font-size:14px;gap:7px}.mark{width:37px;height:37px;border-radius:11px}.site-logo{width:28px;height:28px}.nav-actions{gap:5px}.nav-actions .legal-links{display:none}.preview-panel .theme button{padding:7px 9px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Ajustes puntuales solicitados: marca más grande, tema junto al visor y distintivo Play. */
+.sitehead .brand{font-size:19px;letter-spacing:-.025em}
+.preview-panel .theme{flex:none;align-self:center}
+.preview-panel .theme button{min-width:54px}
+.store-availability{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:2px 0 19px}
+.play-badge{display:block;width:186px;max-width:100%;height:auto;cursor:default;user-select:none}
+.store-caption{font-size:12px;color:var(--muted);font-weight:650}
+@media(max-width:910px){.store-availability{justify-content:center}}
+@media(max-width:600px){
+ .sitehead .brand{font-size:16px;letter-spacing:-.02em}
+ .preview-panel .theme button{min-width:48px}
+ .store-availability{gap:8px}
+}
+@media(max-width:395px){
+ .preview-panel .paneltop{align-items:flex-start;gap:8px}
+ .preview-panel .theme{gap:1px;padding:3px}
+ .preview-panel .theme button{min-width:40px;padding:7px 6px;font-size:11px}
+}
