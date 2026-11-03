@@ -221,3 +221,18 @@ body {
  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
  .hero .phone:hover,.legal-mini:hover,.presentation .tile:hover,.hero .feature:hover{transform:none}
 }
+
+
+/* El SVG original detecta el tema del sistema: estos filtros aseguran que siga
+   contrastando cuando el usuario elige manualmente otro tema para la página. */
+[data-theme="light"] .site-logo,
+[data-theme="light"] .footer-logo img{
+  filter:brightness(0) saturate(100%) invert(15%) sepia(22%) saturate(1894%) hue-rotate(196deg) brightness(92%) contrast(96%);
+}
+[data-theme="dark"] .site-logo,
+[data-theme="dark"] .footer-logo img{
+  filter:brightness(0) invert(1);
+}
+@media(max-width:910px){
+  body{background-attachment:scroll}
+}
