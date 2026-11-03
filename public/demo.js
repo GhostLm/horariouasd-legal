@@ -48,7 +48,7 @@
   const dayCards=()=>{
     const selected=[1,2,3,4,5,6,7,8,9];
     return '<div class="phone-days" aria-label="Seleccionar día">'+selected.map((d)=>{
-      const idx=(d-1)%7;
+      const idx=d%7;
       const meta=days[idx], active=state.day===d;
       const color=classData.some(c=>c.day===idx)?meta.color:null;
       return '<button type="button" class="day-pill'+(active?' active':'')+'" data-day="'+d+'" aria-pressed="'+active+'" style="--day-color:'+(color||'transparent')+'"><span>'+d+'</span><small>'+meta.short+'</small>'+(color?'<span class="day-line"></span>':'')+'</button>';
@@ -69,7 +69,7 @@
       const rows=days.map((day,i)=>{
         const num=i+1, data=state.week===0?classData.filter(c=>c.day===i):[];
         const subjects=data.slice(0,3).map(c=>'<div class="weekday-subject"><strong>'+c.name+'</strong><small>'+c.time+'</small></div>').join("");
-        return '<div class="weekday-row'+(!data.length?' has-no-classes':'')+'" style="--card-day:'+day.color+'"><div class="weekday-cell">'+day.short+'<strong>'+num+'</strong></div><div class="weekday-subjects">'+subjects+'</div><button type="button" class="weekday-more" data-open-agenda="'+i+'" aria-label="Ver agenda del '+day.name+'">›</button></div>';
+        return '<div class="weekday-row'+(!data.length?' has-no-classes':'')+'" style="--card-day:'+day.color+'"><div class="weekday-cell">'+day.short+'<strong>'+num+'</strong></div><div class="weekday-subjects">'+subjects+'</div><button type="button" class="weekday-more" data-open-agenda="'+idx+'" aria-label="Ver agenda del '+day.name+'">›</button></div>';
       }).join("");
       viewport.innerHTML=heading+weekCards()+'<div class="phone-content">'+rows+'</div>';
     }
