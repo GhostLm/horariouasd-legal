@@ -1,0 +1,15 @@
+/* ÚNICAS diferencias visuales autorizadas de portada respecto a vista-previa.html.
+   Se carga DESPUÉS de /preview.css. Nunca modificar la hoja usada por la referencia. */
+.brand--logo{font-size:19px;letter-spacing:-.02em;text-decoration:none;color:var(--text)}
+.brand--logo:hover{text-decoration:none}
+.brand--logo .mark{width:43px;height:43px;flex:none}
+.brand--logo .site-logo{width:34px;height:34px;object-fit:contain}
+html[data-theme="light"] .brand--logo .site-logo{filter:brightness(0) saturate(100%) invert(15%) sepia(22%) saturate(1894%) hue-rotate(196deg) brightness(92%) contrast(96%)}
+html[data-theme="dark"] .brand--logo .site-logo{filter:brightness(0) invert(1)}
+.store-availability{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:5px 0 18px}
+.play-badge{display:block;width:186px;height:auto;max-width:100%;cursor:default;user-select:none}
+.store-caption{color:var(--muted);font-size:12px;font-weight:650}
+footer a{color:var(--accent);text-decoration:none;font-weight:650}
+footer a:hover{text-decoration:underline}
+@media(max-width:910px){.store-availability{justify-content:center}}
+@media(max-width:470px){.brand--logo{font-size:16px}.brand--logo .mark{width:38px;height:38px}.brand--logo .site-logo{width:30px;height:30px}.legal-links{gap:10px}}
