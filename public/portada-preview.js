@@ -102,3 +102,49 @@ function setSiteTheme(theme){
 document.getElementById('light').onclick=()=>setSiteTheme('claro');
 document.getElementById('dark').onclick=()=>setSiteTheme('oscuro');
 setSiteTheme('claro');
+
+
+/* Rotación automática del visor principal: seis secciones, sin alterar /vista-previa.html. */
+const rotationSteps = [
+ {view:'dia',agendaFrom:'dia',filter:'principales'},
+ {view:'semana',agendaFrom:'dia',filter:'principales'},
+ {view:'agenda',agendaFrom:'dia',filter:'principales'},
+ {view:'historial',agendaFrom:'dia',filter:'principales'},
+ {view:'pensum',agendaFrom:'dia',filter:'principales'},
+ {view:'semestres',agendaFrom:'dia',filter:'principales'}
+];
+const rotationPanel=document.querySelector('.preview-panel');
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let rotationEnabled=!reducedMotion.matches;
+let rotationVisible=true;
+let rotationPosition=0;
+let rotationTimer=null;
+function stopRotation(){
+ if(!rotationEnabled)return;
+ rotationEnabled=false;
+ if(rotationTimer!==null){clearInterval(rotationTimer);rotationTimer=null;}
+ ++transitionSequence;
+ clearFrameAnimation();
+}
+if(rotationPanel){
+ // Si el usuario toca, hace clic o usa el teclado, el visor deja de avanzar solo.
+ rotationPanel.addEventListener('pointerdown',stopRotation,{capture:true});
+ rotationPanel.addEventListener('click',stopRotation,true);
+ rotationPanel.addEventListener('keydown',event=>{
+   if(event.key==='Enter'||event.key===' ')stopRotation();
+ },true);
+ if('IntersectionObserver' in window){
+   rotationVisible=false;
+   const observer=new IntersectionObserver(entries=>{
+     rotationVisible=entries.some(entry=>entry.isIntersecting);
+   },{threshold:0.1});
+   observer.observe(rotationPanel);
+ }
+ if(rotationEnabled){
+   rotationTimer=window.setInterval(()=>{
+     if(!rotationEnabled||document.hidden||!rotationVisible)return;
+     rotationPosition=(rotationPosition+1)%rotationSteps.length;
+     transitionTo(rotationSteps[rotationPosition]);
+   },4500);
+ }
+}
