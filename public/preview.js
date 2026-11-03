@@ -18,4 +18,12 @@ function render(){let key=state.view;if(key==='agenda')key='agenda-'+state.agend
  if(state.view!=='agenda'&&state.view!=='semestres'){touch('Abrir Pensum',0,90,20,10,()=>setView('pensum'));touch('Abrir Historial',20,90,20,10,()=>setView('historial'));touch('Abrir Horario',40,90,20,10,()=>setView('dia'))}
  }
  document.querySelectorAll('#views button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
- document.getElementById('light').onclick=()=>{state.theme='claro';render()};document.getElementById('dark').onclick=()=>{state.theme='oscuro';render()};render();
+ const root=document.documentElement;
+function setSiteTheme(theme){
+ state.theme=theme;
+ root.dataset.theme=theme==='oscuro'?'dark':'light';
+ render();
+}
+document.getElementById('light').onclick=()=>setSiteTheme('claro');
+document.getElementById('dark').onclick=()=>setSiteTheme('oscuro');
+setSiteTheme('claro');
